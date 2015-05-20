@@ -10,8 +10,10 @@ $.ajax({
 			r_length = collection.length;
 
 		for (var i=0; i<r_length; i++) {
-			var title = collection[i].m_title;
-			$('h1').after("<p>" + title.text + "<p>");
+			var title = collection[i].m_title,
+				gross = collection[i].gross;
+
+			$('table#movies tbody').append("<tr><td>" + title.text + "</td> <td>" + gross + "</td></tr>");
 		}
 
 	},
