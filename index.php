@@ -2,7 +2,7 @@
 	$request = "https://www.kimonolabs.com/api/bx513rau?apikey=oEcJwLHv6GedDnOkwRT8Pa9tcN43Qr7D";
 	$response = file_get_contents($request);
 	$results = json_decode($response, TRUE);
-	$collection = $results.results.collection1;
+	$collection = $results;
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,6 @@
 	<meta charset="UTF-8">
 	<title>FetchFlix</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 	<h1>Welcome to FetchFlix</h1>
@@ -28,13 +27,15 @@
 			<tbody>
 				<?php 
 					// First 2 fields are garbage
-					for ($i=2; $i < count($collection); $i++ ) {
+					for ($i=0; $i < count($collection); $i++ ) {
 
-						$title = $collection[$i].m_title.text;
-						$gross = $collection[$i].gross;
+						$title = $results["results"]["collection1"][$i]["m_title"]["text"];
+						$gross = $results["results"]["collection1"][$i]["gross"];
 
-						echo "<tr><td>$title</td></tr>";
-						echo "<tr><td>$gross</td></tr>";
+						echo "<tr>";
+						echo "<td>$title</td>";
+						echo "<td>$gross</td>";
+						echo "</tr>";
 
 					}
 				?>
