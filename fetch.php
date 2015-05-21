@@ -6,8 +6,6 @@
 	$fp = fopen('results.json', 'w');
 	fwrite($fp, json_encode($results));
 	fclose($fp);
-
-	$data[] = [];
 	
 
 	for ($i=0; $i < count($results); $i++ ) {
@@ -21,8 +19,10 @@
 		$imdb_response = file_get_contents($imdb_request);
 		$imdb_results = json_decode($imdb_response, TRUE);
 
-		if ($i == 0) { $data = $imdb_results; }
-		else { array_push($data, $imdb_results); }
+		/*if ($i == 0) { $data[$i] = $imdb_results; }
+		else { array_push($data[$i], $imdb_results); }*/
+
+		$data[$i] = $imdb_results;
 	}
 
 	$fp = fopen('results_imdb.json', 'w');

@@ -15,7 +15,7 @@
 	<script>
 		$(document).ready(function() 
 		    { 
-		        $("table#movies").tablesorter(); 
+		        $("table#movies").tablesorter({sortList: [[2,1]] }); 
 		    } 
 		); 
 	</script>
@@ -28,12 +28,14 @@
 		<table id="movies" class="tablesorter">
 			<thead>
 				<tr>
+					<th></th>
 					<th>Title</th>	
 					<th>iMDb Rating</th>
 					<th>Gross</th>
 					<th>Runtime</th>
 					<th>Rated</th>
 					<th>Released</th>
+					<th>Plot</th>
 				</tr>
 			</thead>
 			
@@ -54,18 +56,26 @@
 						$imdb_response = file_get_contents($imdb_request);
 						$imdb_results = json_decode($imdb_response, TRUE);
 
-						$released = $imdb_results["Released"];
-						$rated = $imdb_results["Rated"];
-						$runtime = $imdb_results["Runtime"];
-						$score = $imdb_results["imdbRating"];
+						$poster = $imdb_results[$i]["Poster"];
+						$score = $imdb_results[$i]["imdbRating"];
+						$rated = $imdb_results[$i]["Rated"];
+						$runtime = $imdb_results[$i]["Runtime"];
+						$released = $imdb_results[$i]["Released"];
+						$plot = $imdb_results[$i]["Plot"];
+
+
+
+						$movie_page_url = $results["results"]["collection1"][$i]["m_title"]["href"];
 
 						echo "<tr>";
-						echo "<td>$title</td>";
+						echo "<td><a href='$movie_page_url'><img src='$poster' height='100' alt='$title' title='$title'></a></td>";
+						echo "<td><a href='$movie_page_url'>$title</a></td>";
 						echo "<td>$score</td>";
 						echo "<td>$gross</td>";
 						echo "<td>$runtime</td>";
 						echo "<td>$rated</td>";
 						echo "<td>$released</td>";
+						echo "<td>$plot</td>";
 						echo "</tr>";
 
 					}
