@@ -47,9 +47,10 @@
 						$href = parse_url($results["results"]["collection1"][$i]["m_title"]["href"]);
 
 						// Get the iMDb id
-						$imdb_id = explode('/', $href[path]);
+						// This should be the last element in the exploded array
+						$imdb_id = end(explode('/', $href[path]));
 
-						$imdb_request = "http://www.omdbapi.com/?i=".end($imdb_id)."&plot=short&r=json";
+						$imdb_request = "results_imdb.json";
 						$imdb_response = file_get_contents($imdb_request);
 						$imdb_results = json_decode($imdb_response, TRUE);
 
