@@ -1,5 +1,5 @@
 <?php
-	$request = "https://www.kimonolabs.com/api/bx513rau?apikey=oEcJwLHv6GedDnOkwRT8Pa9tcN43Qr7D";
+	$request = "results.json";
 	$response = file_get_contents($request);
 	$results = json_decode($response, TRUE);
 ?>
